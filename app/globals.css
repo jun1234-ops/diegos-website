@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --crimson: #9b1c1c;
+  --crimson-dark: #7a1515;
+  --crimson-light: #c23b3b;
+  --gold: #d4a017;
+  --gold-light: #f0c040;
+  --cream: #fdf8f0;
+  --cream-dark: #f5edd8;
+  --dark: #1a0a0a;
+  --text: #2d1515;
+  --muted: #7a6060;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--cream);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--cream-dark);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--crimson);
+  border-radius: 3px;
+}
+
+/* Section label utility */
+.section-label {
+  display: inline-block;
+  background: rgba(155, 28, 28, 0.1);
+  color: var(--crimson);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
+
+/* Gold label variant */
+.section-label-gold {
+  background: rgba(212, 160, 23, 0.2);
+  color: var(--gold);
+}
+
+/* Smooth transitions for FAQ */
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease, padding 0.35s ease;
+}
+.faq-answer.open {
+  max-height: 300px;
+  padding-bottom: 20px;
+}
+
+/* Form focus styles */
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--crimson) !important;
+  background: white !important;
+}
+
+/* Pulse animation for hero badge */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+.pulse-dot {
+  animation: pulse 2s infinite;
+}
+
+/* Gallery hover */
+.gallery-item:hover .gallery-overlay {
+  opacity: 1;
+}
