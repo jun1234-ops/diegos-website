@@ -1,25 +1,14 @@
 "use client";
 import { useState, useEffect } from "react";
-import Image from "next/image";
 
-const categories = ["all", "rice", "swallow", "soup", "protein", "package"];
-
-const meals = [
-  { cat: "rice", img: "/Jollof_Rice.jpg", name: "Jollof Rice", desc: "Party-style jollof rice cooked to perfection with rich tomato sauce and spices.", portion: "Serves 1–2", badge: "Popular" },
-  { cat: "rice", img: "/Fried_Rice.jpg", name: "Fried Rice", desc: "Flavourful fried rice with mixed vegetables, egg, and your choice of protein.", portion: "Serves 1–2", badge: null },
-  { cat: "rice", img: "/Native_Rice.jpg", name: "Native Rice", desc: "Rich ofada-style rice cooked with local palm oil sauce and assorted meat.", portion: "Serves 1–2", badge: null },
-  { cat: "swallow", img: "/Eba__Egusi_soup.jpg", name: "Eba & Egusi Soup", desc: "Classic eba paired with richly prepared egusi soup and assorted meat/fish.", portion: "Serves 1", badge: "Signature" },
-  { cat: "swallow", img: "/Pounded_Yam.jpg", name: "Pounded Yam", desc: "Smooth, well-pounded yam served with your choice of soup.", portion: "Serves 1", badge: null },
-  { cat: "soup", img: "/Bitterleaf_Soup.jpg", name: "Bitterleaf Soup", desc: "Traditional bitterleaf soup slow-cooked with palm oil, ogiri, and fresh beef.", portion: "Serves 2", badge: "Bestseller" },
-  { cat: "soup", img: "/Oha_Soup.jpg", name: "Oha Soup", desc: "Delicious oha soup made with fresh oha leaves and crayfish — a true classic.", portion: "Serves 2", badge: null },
-  { cat: "protein", img: "/Grilled_Chicken.jpg", name: "Grilled Chicken", desc: "Seasoned and perfectly grilled chicken, available whole or in pieces.", portion: "Per piece", badge: "Add-on" },
-  { cat: "protein", img: "/Peppered_Fish.jpg", name: "Peppered Fish", desc: "Fresh fish seasoned with peppers and spices, grilled to smoky perfection.", portion: "Per piece", badge: null },
-  { cat: "package", img: "/Corporate_Packs.jpg", name: "Corporate Pack (10)", desc: "10 full meals of your choice, packed individually and labeled — perfect for offices.", portion: "Serves 10", badge: "Best Value" },
-  { cat: "package", img: "/Event_Packages.jpg", name: "Event Package (50)", desc: "Full catering package for 50 guests — starter, main, drinks and dessert.", portion: "Serves 50", badge: null },
+const stats = [
+  { num: "500+", label: "Happy Clients" },
+  { num: "5★", label: "Average Rating" },
+  { num: "3 yrs", label: "In Business" },
+  { num: "100%", label: "Hygiene Certified" },
 ];
 
-export default function Menu() {
-  const [active, setActive] = useState("all");
+export default function Hero() {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -29,107 +18,179 @@ export default function Menu() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  const filtered = meals.filter((m) => active === "all" || m.cat === active);
-
   const scrollTo = (id: string) =>
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
   return (
-    <section id="menu" style={{ background: "white", padding: isMobile ? "60px 5%" : "90px 5%" }}>
-      <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-        <div style={{ textAlign: "center", marginBottom: "40px" }}>
-          <span className="section-label">Our Menu</span>
-          <h2 style={{ fontFamily: "var(--font-playfair)", fontSize: "clamp(28px,3.5vw,44px)", fontWeight: 700, color: "var(--text)", lineHeight: 1.2, marginBottom: "14px" }}>
-            Meals made with love
-          </h2>
-          <p style={{ fontSize: "16px", color: "var(--muted)", lineHeight: 1.7, maxWidth: "560px", margin: "0 auto" }}>
-            Local and continental dishes, prepared fresh every day with quality ingredients.
+    <section
+      id="hero"
+      style={{
+        minHeight: "100vh",
+        background: "linear-gradient(135deg, var(--crimson-dark) 0%, #3D0C0C 50%, #1A0505 100%)",
+        position: "relative",
+        display: "flex",
+        alignItems: "center",
+        padding: isMobile ? "100px 6% 60px" : "100px 5% 60px",
+        overflow: "hidden",
+      }}
+    >
+      {/* Background pattern */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          opacity: 0.05,
+          backgroundImage: "repeating-linear-gradient(45deg, var(--gold) 0, var(--gold) 1px, transparent 0, transparent 50%)",
+          backgroundSize: "30px 30px",
+        }}
+      />
+      {/* Glow */}
+      <div
+        style={{
+          position: "absolute",
+          top: "-20%",
+          right: "-10%",
+          width: isMobile ? "300px" : "600px",
+          height: isMobile ? "300px" : "600px",
+          background: "radial-gradient(circle, rgba(212,160,23,0.12) 0%, transparent 70%)",
+          pointerEvents: "none",
+        }}
+      />
+
+      <div style={{ position: "relative", zIndex: 2, width: "100%", maxWidth: "1200px", margin: "0 auto" }}>
+        <div style={{ maxWidth: isMobile ? "100%" : "680px" }}>
+          {/* Badge */}
+          <div
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "8px",
+              background: "rgba(212,160,23,0.15)",
+              border: "1px solid rgba(212,160,23,0.4)",
+              borderRadius: "50px",
+              padding: "8px 18px",
+              marginBottom: "28px",
+            }}
+          >
+            <span
+              className="pulse-dot"
+              style={{ width: "8px", height: "8px", background: "var(--gold)", borderRadius: "50%", display: "block" }}
+            />
+            <span style={{ color: "var(--gold)", fontSize: isMobile ? "11px" : "13px", fontWeight: 500, letterSpacing: "0.5px" }}>
+              Now accepting corporate orders
+            </span>
+          </div>
+
+          {/* Title */}
+          <h1
+            style={{
+              fontFamily: "var(--font-playfair)",
+              fontSize: isMobile ? "36px" : "clamp(36px, 5vw, 64px)",
+              fontWeight: 700,
+              color: "white",
+              lineHeight: 1.15,
+              marginBottom: "22px",
+            }}
+          >
+            Delicious Meals.<br />
+            <span style={{ color: "var(--gold)" }}>Reliable Catering.</span>
+            <br />Exceptional Service.
+          </h1>
+
+          {/* Subtext */}
+          <p
+            style={{
+              fontSize: isMobile ? "15px" : "17px",
+              color: "rgba(255,255,255,0.75)",
+              lineHeight: 1.7,
+              marginBottom: "38px",
+              maxWidth: isMobile ? "100%" : "520px",
+            }}
+          >
+            From corporate meals to special events, Diego&apos;s delivers quality food you can trust — prepared with care, served with love.
           </p>
-        </div>
 
-        {/* Tabs */}
-        <div style={{
-          display: "flex",
-          gap: "8px",
-          flexWrap: "wrap",
-          justifyContent: "center",
-          marginBottom: "40px",
-          padding: isMobile ? "0 2%" : "0",
-        }}>
-          {categories.map((cat) => (
+          {/* Buttons */}
+          <div style={{
+            display: "flex",
+            gap: "12px",
+            flexDirection: isMobile ? "column" : "row",
+            flexWrap: "wrap",
+          }}>
             <button
-              key={cat}
-              onClick={() => setActive(cat)}
+              onClick={() => scrollTo("booking")}
               style={{
-                padding: isMobile ? "8px 14px" : "10px 22px",
-                borderRadius: "50px",
-                border: "1.5px solid",
-                borderColor: active === cat ? "var(--crimson)" : "rgba(155,28,28,0.2)",
-                background: active === cat ? "var(--crimson)" : "transparent",
-                color: active === cat ? "white" : "var(--muted)",
-                fontSize: isMobile ? "12px" : "14px",
-                fontWeight: 500,
+                background: "var(--gold)",
+                color: "var(--dark)",
+                padding: "14px 30px",
+                borderRadius: "8px",
+                fontWeight: 700,
+                fontSize: "15px",
+                border: "none",
                 cursor: "pointer",
-                transition: "all 0.2s",
                 fontFamily: "var(--font-dm)",
-                textTransform: "capitalize",
+                transition: "all 0.2s",
+                width: isMobile ? "100%" : "auto",
               }}
+              onMouseEnter={(e) => { (e.currentTarget.style.background = "var(--gold-light)"); (e.currentTarget.style.transform = "translateY(-1px)"); }}
+              onMouseLeave={(e) => { (e.currentTarget.style.background = "var(--gold)"); (e.currentTarget.style.transform = "none"); }}
             >
-              {cat === "all" ? "All Meals" : cat === "rice" ? "Rice Dishes" : cat === "swallow" ? "Swallow Meals" : cat === "soup" ? "Soups" : cat === "protein" ? "Proteins" : "Packages"}
+              Book Now
             </button>
-          ))}
+            <button
+              onClick={() => scrollTo("menu")}
+              style={{
+                background: "transparent",
+                color: "white",
+                padding: "14px 30px",
+                borderRadius: "8px",
+                fontWeight: 600,
+                fontSize: "15px",
+                border: "2px solid rgba(255,255,255,0.4)",
+                cursor: "pointer",
+                fontFamily: "var(--font-dm)",
+                transition: "all 0.2s",
+                width: isMobile ? "100%" : "auto",
+              }}
+              onMouseEnter={(e) => { (e.currentTarget.style.borderColor = "white"); (e.currentTarget.style.background = "rgba(255,255,255,0.08)"); }}
+              onMouseLeave={(e) => { (e.currentTarget.style.borderColor = "rgba(255,255,255,0.4)"); (e.currentTarget.style.background = "transparent"); }}
+            >
+              View Menu
+            </button>
+            <button
+              onClick={() => scrollTo("services")}
+              style={{
+                background: "transparent",
+                color: "white",
+                padding: "14px 30px",
+                borderRadius: "8px",
+                fontWeight: 600,
+                fontSize: "15px",
+                border: "2px solid rgba(255,255,255,0.4)",
+                cursor: "pointer",
+                fontFamily: "var(--font-dm)",
+                transition: "all 0.2s",
+                width: isMobile ? "100%" : "auto",
+              }}
+              onMouseEnter={(e) => { (e.currentTarget.style.borderColor = "white"); (e.currentTarget.style.background = "rgba(255,255,255,0.08)"); }}
+              onMouseLeave={(e) => { (e.currentTarget.style.borderColor = "rgba(255,255,255,0.4)"); (e.currentTarget.style.background = "transparent"); }}
+            >
+              Our Services
+            </button>
+          </div>
         </div>
 
-        {/* Grid */}
+        {/* Stats */}
         <div style={{
           display: "grid",
-          gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(auto-fill, minmax(240px, 1fr))",
-          gap: isMobile ? "14px" : "22px",
+          gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(4, auto)",
+          gap: isMobile ? "24px" : "40px",
+          marginTop: "60px",
         }}>
-          {filtered.map((meal) => (
-            <div
-              key={meal.name}
-              style={{
-                borderRadius: "14px",
-                overflow: "hidden",
-                background: "var(--cream)",
-                border: "1px solid rgba(155,28,28,0.08)",
-                transition: "transform 0.2s",
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.transform = "translateY(-3px)")}
-              onMouseLeave={(e) => (e.currentTarget.style.transform = "none")}
-            >
-              {/* Image area */}
-              <div style={{ height: isMobile ? "120px" : "160px", position: "relative", overflow: "hidden" }}>
-                <Image src={meal.img} alt={meal.name} fill style={{ objectFit: "cover" }} />
-                {meal.badge && (
-                  <span style={{ position: "absolute", top: "8px", right: "8px", background: "var(--crimson)", color: "white", fontSize: "10px", fontWeight: 700, padding: "3px 8px", borderRadius: "50px", zIndex: 1 }}>
-                    {meal.badge}
-                  </span>
-                )}
-              </div>
-              {/* Body */}
-              <div style={{ padding: isMobile ? "12px" : "18px" }}>
-                <h3 style={{ fontFamily: "var(--font-playfair)", fontSize: isMobile ? "14px" : "17px", fontWeight: 700, color: "var(--text)", marginBottom: "6px" }}>
-                  {meal.name}
-                </h3>
-                {!isMobile && (
-                  <p style={{ fontSize: "13px", color: "var(--muted)", lineHeight: 1.6, marginBottom: "14px" }}>
-                    {meal.desc}
-                  </p>
-                )}
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: isMobile ? "8px" : "0" }}>
-                  <span style={{ fontSize: "11px", color: "var(--muted)", background: "rgba(155,28,28,0.06)", padding: "3px 8px", borderRadius: "50px" }}>
-                    {meal.portion}
-                  </span>
-                  <button
-                    onClick={() => scrollTo("booking")}
-                    style={{ background: "var(--crimson)", color: "white", border: "none", padding: isMobile ? "6px 10px" : "7px 14px", borderRadius: "6px", fontSize: "11px", fontWeight: 600, cursor: "pointer", fontFamily: "var(--font-dm)" }}
-                  >
-                    Order
-                  </button>
-                </div>
-              </div>
+          {stats.map((s) => (
+            <div key={s.label}>
+              <div style={{ fontFamily: "var(--font-playfair)", fontSize: isMobile ? "26px" : "32px", fontWeight: 700, color: "var(--gold)" }}>{s.num}</div>
+              <div style={{ fontSize: "13px", color: "rgba(255,255,255,0.6)", marginTop: "2px" }}>{s.label}</div>
             </div>
           ))}
         </div>
